@@ -1,0 +1,10 @@
+{
+  "name": "@bob/ds-{name}",
+  "type": "module",
+  "main": "index.js",
+  "module": "index.js",
+  "types": "index.d.ts",
+  "dependencies": {
+    "lit": "^2.0.0"
+  }
+}
