@@ -1,5 +1,5 @@
 {
-  "name": "@bob/ds-{name}",
+  "name": "@bob/{name}",
   "type": "module",
   "main": "index.js",
   "module": "index.js",
