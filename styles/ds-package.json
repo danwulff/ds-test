@@ -1,19 +1,22 @@
 {
-  "name": "@danwulff/ds-test/styles/{name}",
+  "name": "@danwulff/ds-test/styles/{{name}}",
   "type": "module",
-  "main": "{name}.css",
-  "module": "{name}.css",
-  "types": "{name}.css.map",
+  "main": "{{name}}.css",
+  "module": "{{name}}.css",
+  "types": "{{name}}.css.map",
   "repository": {
     "type": "git",
     "url": "https://github.com/danwulff/ds-test.git"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "registry": "https://npm.pkg.github.com"
   },
   "exports": {
-    "./{name}": {
-      "styles": "./{name}.css"
+    "./{{name}}": {
+      "styles": "./{{name}}.css"
+    },
+    "./{{name}}.min": {
+      "styles": "./{{name}}.min.css"
     }
   }
 }

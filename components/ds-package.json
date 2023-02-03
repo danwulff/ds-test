@@ -1,15 +1,15 @@
 {
-  "name": "@danwulff/ds-test/components/{name}",
+  "name": "@danwulff/ds-test/components/{{name}}",
   "type": "module",
-  "main": "{name}.js",
-  "module": "{name}.js",
-  "types": "{name}.d.ts",
+  "main": "{{name}}.js",
+  "module": "{{name}}.js",
+  "types": "{{name}}.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/danwulff/ds-test.git"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "registry": "https://npm.pkg.github.com"
   },
   "peerDependencies": {
     "lit": "^2.0.0"
