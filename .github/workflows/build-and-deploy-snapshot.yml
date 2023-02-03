@@ -1,10 +1,10 @@
-name: Publish package to GitHub Packages
+name: build-and-deploy-snapshot
 on:
   pull_request:
     branches:
       - main
 jobs:
-  build:
+  build-and-deploy-snapshot:
     runs-on: ubuntu-latest
     permissions:
       contents: read
