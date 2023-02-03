@@ -8,8 +8,6 @@
     "sourceMap": true,
     "inlineSources": true,
     "moduleResolution": "node",
-    "outDir": "./dist",
-    "rootDir": ".",
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -22,5 +20,6 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitOverride": true
   },
-  "include": ["components/**/*.ts", "scripts/**/*.ts", "storybook/**/*.ts"]
+  "include": ["**/*.ts", "scripts/tsconfig.build.json"],
+  "exclude": ["node_modules"]
 }
