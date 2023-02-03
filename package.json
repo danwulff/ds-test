@@ -3,8 +3,8 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "build": "node ./scripts/build.js",
-    "postinstall": "rm -r scripts/dist/ && npx tsc --project ./scripts/tsconfig.build.json && node ./scripts/install.js"
+    "build": "node ./scripts/dist/build.js",
+    "postinstall": "rm -r scripts/dist/ && npx tsc --project ./scripts/tsconfig.build.json && node ./scripts/dist/install.js"
   },
   "repository": {
     "type": "git",
