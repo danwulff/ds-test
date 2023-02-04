@@ -18,4 +18,4 @@ jobs:
           scope: "@danwulff"
       - run: npm ci
       # - run: npm run build
-      - run: npm run deploy-snapshot -- {{ github.event.pull_request.head.sha }}
+      - run: npm run deploy-snapshot -- ${{ github.event.pull_request.head.sha }}
