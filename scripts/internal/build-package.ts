@@ -22,6 +22,6 @@ export function buildPackage(parentDir: string, name: string) {
   );
   writeFileSync(
     `${parentDir}/${name}/dist/package.json`,
-    JSON.stringify(tempPackage)
+    JSON.stringify(tempPackage, null, 2)
   );
 }

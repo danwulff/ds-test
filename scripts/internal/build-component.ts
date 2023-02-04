@@ -10,7 +10,7 @@ export function buildComponent(name: string): void {
   );
   writeFileSync(
     `components/${name}/tsconfig.component.json`,
-    JSON.stringify(tempTSConfig)
+    JSON.stringify(tempTSConfig, null, 2)
   );
 
   execSync(`npx tsc --project components/${name}/tsconfig.component.json`, {
