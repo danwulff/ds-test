@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "node ./scripts/dist/build.js",
-    "postinstall": "rm -rf scripts/dist/ && npx tsc --project ./scripts/tsconfig.build.json && node ./scripts/dist/install.js"
+    "postinstall": "rm -rf scripts/dist/ && npx tsc --project ./scripts/tsconfig.scripts.json && node ./scripts/dist/install.js"
   },
   "repository": {
     "type": "git",

@@ -20,6 +20,6 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitOverride": true
   },
-  "include": ["**/*.ts", "scripts/tsconfig.build.json"],
+  "include": ["**/*.ts"],
   "exclude": ["node_modules"]
 }

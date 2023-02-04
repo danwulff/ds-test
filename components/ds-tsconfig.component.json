@@ -1,6 +1,6 @@
 {
-  "extends": "../tsconfig.json",
-  "include": ["**/ds-*.ts"],
+  "extends": "../../tsconfig.json",
+  "include": ["{{name}}.ts"],
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "dist"
