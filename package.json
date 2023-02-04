@@ -4,9 +4,10 @@
   "version": "1.0.0",
   "scripts": {
     "build": "node scripts/dist/build.js",
-    "publish-version": "echo na",
+    "publish-version": "node scripts/dist/publish-version.js",
     "publish-snapshot": "node scripts/dist/publish-snapshot.js",
-    "postinstall": "rm -rf scripts/dist/ && npx tsc --project scripts/tsconfig.scripts.json && node scripts/dist/install.js"
+    "postinstall": "rm -rf scripts/dist/ && npx tsc --project scripts/tsconfig.scripts.json && node scripts/dist/install.js",
+    "require-semver-label": "node scripts/dist/require-semver-label.ts"
   },
   "repository": {
     "type": "git",

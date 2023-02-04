@@ -1,15 +1,26 @@
-name: build-and-publish-snapshot
+name: publish-version-after-merge
+
 on:
   pull_request:
     branches:
       - main
+    types:
+      - closed
+
+concurrency:
+  group: publish-version-after-merge
+
 jobs:
-  build-and-publish-snapshot:
+  publish-version-after-merge:
+    if: github.event.pull_request.merged
     runs-on: ubuntu-latest
     permissions:
       packages: write
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: main
+          fetch-depth: 0
       - uses: actions/setup-node@v3
         with:
           node-version: 18
@@ -17,13 +28,9 @@ jobs:
           scope: "@danwulff"
       - name: Install dependencies
         run: npm ci
-      - name: Lint
-        run: echo TODO
       - name: Build Styles & Components
         run: npm run build
-      - name: Run unit tests
-        run: echo TODO
-      - name: Publish package snapshots
-        run: npm run publish-snapshot -- ${{ github.event.pull_request.number }} ${{ github.event.pull_request.head.sha }}
+      - name: Publish package version
+        run: npm run publish-version -- ${{ github.event.pull_request.number }} '${{ toJson(github.event.pull_request.labels.*.name) }}'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,20 @@
+name: require-semver-label
+
+on:
+  pull_request:
+    branches:
+      - ci
+    types: [opened, reopened, synchronize, labeled, unlabeled]
+
+jobs:
+  require-semver-label:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: npm run ci
+      - name: Require semver labeled
+        run: npm run require-semver-label -- '${{ toJson(github.event.pull_request.labels.*.name) }}'

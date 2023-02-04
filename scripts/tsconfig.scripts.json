@@ -1,6 +1,7 @@
 {
   "extends": "../tsconfig.json",
   "include": ["*.ts"],
+  "exclude": ["internal"],
   "compilerOptions": {
     "types": ["node"],
     "module": "commonjs",
