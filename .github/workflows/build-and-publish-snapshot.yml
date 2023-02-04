@@ -25,6 +25,6 @@ jobs:
       - name: Run unit tests
         run: echo TODO
       - name: Publish package snapshots
-        run: npm run deploy-snapshot -- ${{ github.event.pull_request.number }} ${{ github.event.pull_request.head.sha }}
+        run: npm run publish-snapshot -- ${{ github.event.pull_request.number }} ${{ github.event.pull_request.head.sha }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
