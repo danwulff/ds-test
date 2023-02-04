@@ -4,6 +4,12 @@ import { getPackageNames } from "./internal/get-package-names";
 
 const [_exec, _path, pullRequestNum, commitSHA] = process.argv;
 
+// set git user to make "npm version" happy
+execSync(`git config user.email "danielwulff.ee@gmail.com"`, {
+  stdio: "inherit",
+});
+execSync(`git config user.name "Daniel Wulff"`, { stdio: "inherit" });
+
 // deploy style package snapshot
 const stylesDir = "styles";
 const stylePackageNames = getPackageNames(stylesDir);
