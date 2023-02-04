@@ -1,0 +1,29 @@
+name: build-and-publish-snapshot
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  build-and-publish-snapshot:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          registry-url: "https://npm.pkg.github.com"
+          scope: "@danwulff"
+      - name: Install dependencies
+        run: npm ci
+      - name: Lint
+        run: echo TODO
+      - name: Build Styles & Components
+        run: npm run build
+      - name: Run unit tests
+        run: echo TODO
+      - name: Publish package snapshots
+        run: npm run publish-snapshot -- ${{ github.event.pull_request.number }} ${{ github.event.pull_request.head.sha }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -2,7 +2,13 @@
   "name": "ds-test",
   "private": true,
   "version": "1.0.0",
-  "scripts": {},
+  "scripts": {
+    "build": "node scripts/dist/build.js",
+    "publish-version": "node scripts/dist/publish-version.js",
+    "publish-snapshot": "node scripts/dist/publish-snapshot.js",
+    "postinstall": "rm -rf scripts/dist/ && npx tsc --project scripts/tsconfig.scripts.json && node scripts/dist/install.js",
+    "require-semver-label": "node scripts/dist/require-semver-label.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/danwulff/ds-test.git"
