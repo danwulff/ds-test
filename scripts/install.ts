@@ -1,18 +1,24 @@
 import { execSync } from "child_process";
 import { getPackageNames } from "./internal/get-package-names";
 
-// install style dependencies
+// postinstall gets triggered on both "install" and "ci"
+// perform the same command in all packages
+const installCommand = `npm ${process.env.npm_command ?? "install"}`;
+
+// install within style dependencies
 const stylesDir = "styles";
 const stylePackageNames = getPackageNames(stylesDir);
-
 stylePackageNames.forEach((name) => {
-  execSync(`cd ${stylesDir}/${name} && npm i`, { stdio: "inherit" });
+  execSync(`cd ${stylesDir}/${name} && ${installCommand}`, {
+    stdio: "inherit",
+  });
 });
 
-// install component dependencies
+// install within component dependencies
 const componentsDir = "components";
 const componentPackageNames = getPackageNames(componentsDir);
-
 componentPackageNames.forEach((name) => {
-  execSync(`cd ${componentsDir}/${name} && npm i`, { stdio: "inherit" });
+  execSync(`cd ${componentsDir}/${name} && ${installCommand}`, {
+    stdio: "inherit",
+  });
 });
