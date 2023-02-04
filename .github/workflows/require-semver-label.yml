@@ -15,6 +15,6 @@ jobs:
         with:
           node-version: 18
       - name: Install dependencies
-        run: npm run ci
+        run: npm ci
       - name: Require semver labeled
         run: npm run require-semver-label -- '${{ toJson(github.event.pull_request.labels.*.name) }}'
