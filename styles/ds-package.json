@@ -1,5 +1,5 @@
 {
-  "name": "@danwulff/ds-test/styles/{{name}}",
+  "name": "@danwulff/{{name}}",
   "type": "module",
   "main": "{{name}}.css",
   "module": "{{name}}.css",

@@ -1,5 +1,5 @@
 {
-  "name": "@danwulff/ds-test/components/{{name}}",
+  "name": "@danwulff/{{name}}",
   "type": "module",
   "main": "{{name}}.js",
   "module": "{{name}}.js",
