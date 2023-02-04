@@ -3,6 +3,11 @@ import { getPackageNames } from "./internal/get-package-names";
 
 const [_exec, _path, pullRequestNum, labels] = process.argv;
 
+execSync('git config user.email "danielwulff.ee@gmail.com"', {
+  stdio: "inherit",
+});
+execSync('git config user.name "Daniel Wulff"', { stdio: "inherit" });
+
 const parsedSemverLabels = JSON.parse(labels).filter(
   (label: string) => label === "patch" || label === "minor" || label === "major"
 );
