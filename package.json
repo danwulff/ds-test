@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "scripts": {
     "build": "node scripts/dist/build.js",
-    "deploy-prod": "echo na",
-    "deploy-snapshot": "node scripts/dist/deploy-snapshot.js",
+    "publish-version": "echo na",
+    "publish-snapshot": "node scripts/dist/publish-snapshot.js",
     "postinstall": "rm -rf scripts/dist/ && npx tsc --project scripts/tsconfig.scripts.json && node scripts/dist/install.js"
   },
   "repository": {
