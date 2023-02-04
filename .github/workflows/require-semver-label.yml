@@ -3,7 +3,7 @@ name: require-semver-label
 on:
   pull_request:
     branches:
-      - ci
+      - main
     types: [opened, reopened, synchronize, labeled, unlabeled]
 
 jobs:
