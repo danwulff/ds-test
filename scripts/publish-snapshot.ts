@@ -64,7 +64,7 @@ stylePackageNames.forEach((name) => {
   )[0].integrity;
   if (compareTo.integrity === localIntegrity) {
     console.log(`No changes found for ${name}.`);
-    console.log("");
+    console.log("-");
     return;
   }
 
@@ -77,7 +77,7 @@ stylePackageNames.forEach((name) => {
   // });
   console.log(`Published ${name} ${newVersion}`);
   console.log(`Run 'npm i @danwulff/${name}@${tag}' to install`);
-  console.log("");
+  console.log("-");
 });
 
 // // deploy component packages
