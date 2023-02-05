@@ -16,7 +16,9 @@ jobs:
           registry-url: "https://npm.pkg.github.com"
           scope: "@danwulff"
       - name: Generate npmrc
-        run: echo '//npm.pkg.github.com/:_authToken=${{ secrets.READ_PACKAGES  }}' >> .npmrc
+        run: |
+          echo '@danwulff:registry=https://npm.pkg.github.com' >> .npmrc
+          echo '//npm.pkg.github.com/:_authToken=${{ secrets.READ_PACKAGES  }}' >> .npmrc
       - name: Install dependencies
         run: npm ci
       - name: Lint
