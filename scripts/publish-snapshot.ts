@@ -52,7 +52,9 @@ stylePackageNames.forEach((name) => {
     };
   }
   console.log("Compare to:", compareTo.version);
-  execSync(`cd ${distDir} && npm version ${compareTo.version}`);
+  if (localVersion !== compareTo.version) {
+    execSync(`cd ${distDir} && npm version ${compareTo.version}`);
+  }
   const localIntegrity = JSON.parse(
     execSync(`cd ${distDir} && npm pack --dry-run --json`).toString()
   ).integrity;
