@@ -11,8 +11,6 @@ const [_exec, _path, pullRequestNum, commitSHA] = process.argv;
 
 const tag = `pr-${pullRequestNum}`;
 
-execSync(`npm view @danwulff/ds-base@${tag}`, { stdio: "inherit" });
-
 // deploy style package snapshot
 const stylesDir = "styles";
 const stylePackageNames = getPackageNames(stylesDir);
@@ -35,8 +33,10 @@ stylePackageNames.forEach((name) => {
       stdio: "ignore",
     }).toString();
   } catch (e) {
+    console.log("error", e);
     viewResult = "E404";
   }
+  console.log("viewResult:", viewResult);
   if (!viewResult.includes("E404")) {
     console.log(`@danwulff/${name}@${tag} found`);
     const parsedResult = JSON.parse(viewResult);
