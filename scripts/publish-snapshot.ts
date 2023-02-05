@@ -15,7 +15,7 @@ const tag = `pr-${pullRequestNum}`;
 const stylesDir = "styles";
 const stylePackageNames = getPackageNames(stylesDir);
 stylePackageNames.forEach((name) => {
-  console.log(`Publishing snapshot: ${name}`);
+  console.log(`@danwulff/${name}`);
   console.log("Checking for changes...");
 
   // get current version
@@ -23,7 +23,6 @@ stylePackageNames.forEach((name) => {
   const localVersion = JSON.parse(
     readFileSync(`${distDir}/package.json`, "utf-8")
   ).version;
-  console.log("Local version:", localVersion);
 
   // pick a version to compare our current version to
   let compareTo: CompareTo;
@@ -56,7 +55,7 @@ stylePackageNames.forEach((name) => {
       integrity: parsedResult.dist.integrity,
     };
   }
-  console.log("Compare to:", compareTo.version);
+  console.log("Comparing to:", compareTo.version);
   if (localVersion !== compareTo.version) {
     execSync(`cd ${distDir} && npm version ${compareTo.version}`);
   }
@@ -64,7 +63,8 @@ stylePackageNames.forEach((name) => {
     execSync(`cd ${distDir} && npm pack --dry-run --json`).toString()
   )[0].integrity;
   if (compareTo.integrity === localIntegrity) {
-    console.log(`No changes found for ${name}\n\n`);
+    console.log(`No changes found for ${name}.`);
+    console.log("");
     return;
   }
 
@@ -72,11 +72,12 @@ stylePackageNames.forEach((name) => {
   const newVersion = `${localVersion}-${commitSHA}`;
   execSync(`cd ${distDir} && npm version ${newVersion}`, { stdio: "inherit" });
   // publish snapshot
-  execSync(`cd ${distDir} && npm publish --tag ${tag}`, {
-    stdio: "inherit",
-  });
+  // execSync(`cd ${distDir} && npm publish --tag ${tag}`, {
+  //   stdio: "inherit",
+  // });
   console.log(`Published ${name} ${newVersion}`);
-  console.log(`Run 'npm i @danwulff/${name}@${tag}' to install\n\n`);
+  console.log(`Run 'npm i @danwulff/${name}@${tag}' to install`);
+  console.log("");
 });
 
 // // deploy component packages
