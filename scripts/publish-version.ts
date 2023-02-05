@@ -1,4 +1,5 @@
 import { execSync } from "child_process";
+import { buildPackage } from "./internal/build-package";
 import { getPackageNames } from "./internal/get-package-names";
 
 const [_exec, _path, pullRequestNum, labels] = process.argv;
@@ -27,9 +28,13 @@ const increment = parsedSemverLabels[0];
 const stylesDir = "styles";
 const stylePackageNames = getPackageNames(stylesDir);
 stylePackageNames.forEach((name) => {
-  const distDir = `${stylesDir}/${name}/dist`;
+  const packageDir = `${stylesDir}/${name}`;
+  const distDir = `${packageDir}/dist`;
   // set package version
-  execSync(`cd ${distDir} && npm version ${increment}`, { stdio: "inherit" });
+  execSync(`cd ${packageDir} && npm version ${increment}`, {
+    stdio: "inherit",
+  });
+  buildPackage(stylesDir, name);
   // publish snapshot
   execSync(`cd ${distDir} && npm publish`, { stdio: "inherit" });
 });
@@ -38,9 +43,13 @@ stylePackageNames.forEach((name) => {
 const componentsDir = "components";
 const componentPackageNames = getPackageNames(componentsDir);
 componentPackageNames.forEach((name) => {
-  const distDir = `${componentsDir}/${name}/dist`;
+  const packageDir = `${componentsDir}/${name}`;
+  const distDir = `${packageDir}/dist`;
   // set package version
-  execSync(`cd ${distDir} && npm version ${increment}`, { stdio: "inherit" });
+  execSync(`cd ${packageDir} && npm version ${increment}`, {
+    stdio: "inherit",
+  });
+  buildPackage(componentsDir, name);
   // publish snapshot
   execSync(`cd ${distDir} && npm publish`, { stdio: "inherit" });
 });
