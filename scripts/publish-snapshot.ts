@@ -9,6 +9,8 @@ interface CompareTo {
 
 const [_exec, _path, pullRequestNum, commitSHA] = process.argv;
 
+execSync(`npm view @danwulff/ds-base@latest`, { stdio: "inherit" });
+
 const tag = `pr-${pullRequestNum}`;
 
 // deploy style package snapshot
@@ -29,19 +31,21 @@ stylePackageNames.forEach((name) => {
   let compareTo: CompareTo;
   let viewResult: string;
   try {
-    viewResult = execSync(
-      `npm view @danwulff/${name}@${tag} --json`
-    ).toString();
+    viewResult = execSync(`npm view @danwulff/${name}@${tag} --json`, {
+      stdio: "ignore",
+    }).toString();
   } catch (e) {
     viewResult = "E404";
   }
   if (!viewResult.includes("E404")) {
+    console.log(`@danwulff/${name}@${tag} found`);
     const parsedResult = JSON.parse(viewResult);
     compareTo = {
       version: parsedResult["dist-tags"][tag],
       integrity: parsedResult.dist.integrity,
     };
   } else {
+    console.log(`@danwulff/${name}@${tag} not found`);
     viewResult = execSync(
       `npm view @danwulff/${name}@latest --json`
     ).toString();
@@ -57,7 +61,7 @@ stylePackageNames.forEach((name) => {
   }
   const localIntegrity = JSON.parse(
     execSync(`cd ${distDir} && npm pack --dry-run --json`).toString()
-  ).integrity;
+  )[0].integrity;
   // TODO: remove these logs
   console.log("integrities:");
   console.log(compareTo.integrity);
@@ -70,12 +74,12 @@ stylePackageNames.forEach((name) => {
   // set snapshot version
   const newVersion = `${localVersion}-${commitSHA}`;
   execSync(`cd ${distDir} && npm version ${newVersion}`, { stdio: "inherit" });
-  // publish snapshot
-  execSync(`cd ${distDir} && npm publish --tag ${tag}`, {
-    stdio: "inherit",
-  });
-  console.log(`Published ${name} ${newVersion}`);
-  console.log(`Run 'npm i @danwulff/${name}@${tag}' to install.`);
+  // // publish snapshot
+  // execSync(`cd ${distDir} && npm publish --tag ${tag}`, {
+  //   stdio: "inherit",
+  // });
+  // console.log(`Published ${name} ${newVersion}`);
+  // console.log(`Run 'npm i @danwulff/${name}@${tag}' to install.`);
 });
 
 // // deploy component packages
