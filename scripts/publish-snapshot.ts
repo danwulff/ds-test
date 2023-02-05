@@ -29,9 +29,9 @@ stylePackageNames.forEach((name) => {
   let compareTo: CompareTo;
   let viewResult: string;
   try {
-    viewResult = execSync(`npm view @danwulff/${name}@${tag} --json`, {
-      stdio: "ignore",
-    }).toString();
+    viewResult = execSync(
+      `npm view @danwulff/${name}@${tag} --json`
+    ).toString();
   } catch (e) {
     console.log("error", e);
     viewResult = "E404";
