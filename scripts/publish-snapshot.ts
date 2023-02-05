@@ -27,9 +27,14 @@ stylePackageNames.forEach((name) => {
 
   // pick a version to compare our current version to
   let compareTo: CompareTo;
-  let viewResult = execSync(
-    `npm view @danwulff/${name}@${tag} --json`
-  ).toString();
+  let viewResult: string;
+  try {
+    viewResult = execSync(
+      `npm view @danwulff/${name}@${tag} --json`
+    ).toString();
+  } catch (e) {
+    viewResult = "E404";
+  }
   if (!viewResult.includes("E404")) {
     const parsedResult = JSON.parse(viewResult);
     compareTo = {
