@@ -13,10 +13,12 @@ stylePackageNames.forEach((name) => {
   const currentVersion = JSON.parse(
     readFileSync(`${distDir}/package.json`, "utf-8")
   ).version;
-  const newVersion = `${currentVersion}-pr${pullRequestNum}-${commitSHA}`;
+  const newVersion = `${currentVersion}-${commitSHA}`;
   execSync(`cd ${distDir} && npm version ${newVersion}`, { stdio: "inherit" });
   // publish snapshot
-  execSync(`cd ${distDir} && npm publish`, { stdio: "inherit" });
+  execSync(`cd ${distDir} && npm publish --tag pr-${pullRequestNum}`, {
+    stdio: "inherit",
+  });
 });
 
 // deploy component packages
@@ -28,8 +30,10 @@ componentPackageNames.forEach((name) => {
   const currentVersion = JSON.parse(
     readFileSync(`${distDir}/package.json`, "utf-8")
   ).version;
-  const newVersion = `${currentVersion}-pr${pullRequestNum}-${commitSHA}`;
+  const newVersion = `${currentVersion}-${commitSHA}`;
   execSync(`cd ${distDir} && npm version ${newVersion}`, { stdio: "inherit" });
   // publish snapshot
-  execSync(`cd ${distDir} && npm publish`, { stdio: "inherit" });
+  execSync(`cd ${distDir} && npm publish --tag pr-${pullRequestNum}`, {
+    stdio: "inherit",
+  });
 });
