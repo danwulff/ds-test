@@ -9,9 +9,9 @@ interface CompareTo {
 
 const [_exec, _path, pullRequestNum, commitSHA] = process.argv;
 
-execSync(`npm view @danwulff/ds-base@latest`, { stdio: "inherit" });
-
 const tag = `pr-${pullRequestNum}`;
+
+execSync(`npm view @danwulff/ds-base@${tag}`, { stdio: "inherit" });
 
 // deploy style package snapshot
 const stylesDir = "styles";
