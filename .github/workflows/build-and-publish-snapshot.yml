@@ -27,3 +27,5 @@ jobs:
         run: npm run publish-snapshot -- ${{ github.event.pull_request.number }} ${{ github.event.pull_request.head.sha }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build Storybook
+        run: npm run storybook-build

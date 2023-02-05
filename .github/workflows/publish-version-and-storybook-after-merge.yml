@@ -1,4 +1,4 @@
-name: publish-version-after-merge
+name: publish-version-and-storybook-after-merge
 
 on:
   pull_request:
@@ -7,16 +7,19 @@ on:
     types:
       - closed
 
+# limit concurrency, so only 1 runs at a time
 concurrency:
-  group: publish-version-after-merge
+  group: publish-version-and-storybook-after-merge
 
 jobs:
-  publish-version-after-merge:
+  publish-version-and-storybook-after-merge:
     if: github.event.pull_request.merged
     runs-on: ubuntu-latest
     permissions:
       packages: write
       contents: write
+      pages: write
+      id-token: write
     steps:
       - uses: actions/checkout@v3
         with:
@@ -35,3 +38,14 @@ jobs:
         run: npm run publish-version -- ${{ github.event.pull_request.number }} '${{ toJson(github.event.pull_request.labels.*.name) }}'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build Storybook
+        run: npm run storybook-build
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: "storybook/dist/"
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
