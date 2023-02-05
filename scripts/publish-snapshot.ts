@@ -63,7 +63,7 @@ stylePackageNames.forEach((name) => {
     execSync(`cd ${distDir} && npm pack --dry-run --json`).toString()
   )[0].integrity;
   if (compareTo.integrity === localIntegrity) {
-    console.log(`No changes found for ${name}.`);
+    console.log(`No changes for ${name}.`);
     console.log("-");
     return;
   }
@@ -72,9 +72,9 @@ stylePackageNames.forEach((name) => {
   const newVersion = `${localVersion}-${commitSHA}`;
   execSync(`cd ${distDir} && npm version ${newVersion}`, { stdio: "inherit" });
   // publish snapshot
-  // execSync(`cd ${distDir} && npm publish --tag ${tag}`, {
-  //   stdio: "inherit",
-  // });
+  execSync(`cd ${distDir} && npm publish --tag ${tag}`, {
+    stdio: "inherit",
+  });
   console.log(`Published ${name} ${newVersion}`);
   console.log(`Run 'npm i @danwulff/${name}@${tag}' to install`);
   console.log("-");
