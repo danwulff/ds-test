@@ -64,7 +64,7 @@ stylePackageNames.forEach((name) => {
     execSync(`cd ${distDir} && npm pack --dry-run --json`).toString()
   )[0].integrity;
   if (compareTo.integrity === localIntegrity) {
-    console.log(`No changes found for ${name}.`);
+    console.log(`No changes found for ${name}.\n`);
     return;
   }
 
@@ -76,7 +76,7 @@ stylePackageNames.forEach((name) => {
     stdio: "inherit",
   });
   console.log(`Published ${name} ${newVersion}`);
-  console.log(`Run 'npm i @danwulff/${name}@${tag}' to install.`);
+  console.log(`Run 'npm i @danwulff/${name}@${tag}' to install.\n`);
 });
 
 // // deploy component packages
