@@ -7,7 +7,9 @@
     "publish-version": "node scripts/dist/publish-version.js",
     "publish-snapshot": "node scripts/dist/publish-snapshot.js",
     "postinstall": "rm -rf scripts/dist/ && npx tsc --project scripts/tsconfig.scripts.json && node scripts/dist/install.js",
-    "require-semver-label": "node scripts/dist/require-semver-label.js"
+    "require-semver-label": "node scripts/dist/require-semver-label.js",
+    "storybook": "cd storybook && npm run storybook",
+    "storybook-build": "cd storybook && npm run storybook-build"
   },
   "repository": {
     "type": "git",

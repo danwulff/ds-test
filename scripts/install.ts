@@ -22,3 +22,8 @@ componentPackageNames.forEach((name) => {
     stdio: "inherit",
   });
 });
+
+// install within storybook
+execSync(`cd storybook && ${installCommand}`, {
+  stdio: "inherit",
+});

@@ -17,6 +17,8 @@ jobs:
           scope: "@danwulff"
       - name: Install dependencies
         run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Lint
         run: echo TODO
       - name: Build Styles & Components
@@ -27,3 +29,5 @@ jobs:
         run: npm run publish-snapshot -- ${{ github.event.pull_request.number }} ${{ github.event.pull_request.head.sha }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build Storybook
+        run: npm run storybook-build
