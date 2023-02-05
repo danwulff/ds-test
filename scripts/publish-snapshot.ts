@@ -36,7 +36,6 @@ stylePackageNames.forEach((name) => {
     console.log("error", e);
     viewResult = "E404";
   }
-  console.log("viewResult:", viewResult);
   if (!viewResult.includes("E404")) {
     console.log(`@danwulff/${name}@${tag} found`);
     const parsedResult = JSON.parse(viewResult);
@@ -45,7 +44,9 @@ stylePackageNames.forEach((name) => {
       integrity: parsedResult.dist.integrity,
     };
   } else {
-    console.log(`@danwulff/${name}@${tag} not found`);
+    console.log(
+      `@danwulff/${name}@${tag} not found. Comparing to @danwulff/${name}@latest instead.`
+    );
     viewResult = execSync(
       `npm view @danwulff/${name}@latest --json`
     ).toString();
@@ -62,10 +63,6 @@ stylePackageNames.forEach((name) => {
   const localIntegrity = JSON.parse(
     execSync(`cd ${distDir} && npm pack --dry-run --json`).toString()
   )[0].integrity;
-  // TODO: remove these logs
-  console.log("integrities:");
-  console.log(compareTo.integrity);
-  console.log(localIntegrity);
   if (compareTo.integrity === localIntegrity) {
     console.log(`No changes found for ${name}.`);
     return;
@@ -74,12 +71,12 @@ stylePackageNames.forEach((name) => {
   // set snapshot version
   const newVersion = `${localVersion}-${commitSHA}`;
   execSync(`cd ${distDir} && npm version ${newVersion}`, { stdio: "inherit" });
-  // // publish snapshot
-  // execSync(`cd ${distDir} && npm publish --tag ${tag}`, {
-  //   stdio: "inherit",
-  // });
-  // console.log(`Published ${name} ${newVersion}`);
-  // console.log(`Run 'npm i @danwulff/${name}@${tag}' to install.`);
+  // publish snapshot
+  execSync(`cd ${distDir} && npm publish --tag ${tag}`, {
+    stdio: "inherit",
+  });
+  console.log(`Published ${name} ${newVersion}`);
+  console.log(`Run 'npm i @danwulff/${name}@${tag}' to install.`);
 });
 
 // // deploy component packages
