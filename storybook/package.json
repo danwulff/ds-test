@@ -6,7 +6,9 @@
     "storybook": "storybook dev -p 6006",
     "storybook-build": "storybook build -o dist"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@danwulff/ds-button": "^0.0.7"
+  },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.0.0-beta.43",
     "@storybook/addon-links": "^7.0.0-beta.43",
