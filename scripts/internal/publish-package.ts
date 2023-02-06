@@ -1,4 +1,4 @@
-import { execSync } from "child_process";
+import { execSync } from 'child_process';
 
 export function publishPackage(
   name: string,
@@ -8,6 +8,6 @@ export function publishPackage(
   console.log(`Publishing @danwulff/${name} changes...`);
   const distDir = `${parentDir}/${name}/dist`;
   execSync(`cd ${distDir} && npm publish --tag ${tag}`, {
-    stdio: "inherit",
+    stdio: 'inherit',
   });
 }

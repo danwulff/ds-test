@@ -1,4 +1,4 @@
-import { readFileSync } from "fs";
+import { readFileSync } from 'fs';
 
 // Depth first search
 export function getBuildOrder(parentDir: string, names: string[]): string[] {
@@ -8,14 +8,14 @@ export function getBuildOrder(parentDir: string, names: string[]): string[] {
   const packages: Record<string, Record<string, boolean>> = {};
   names.forEach((name) => {
     const fullPackage = JSON.parse(
-      readFileSync(`${parentDir}/${name}/package.json`, "utf-8")
+      readFileSync(`${parentDir}/${name}/package.json`, 'utf-8')
     );
     const dependencies: Record<string, boolean> = {};
     if (fullPackage.peerDependencies) {
       Object.keys(
         fullPackage.peerDependencies as Record<string, string>
       ).forEach((packageName) => {
-        if (packageName.startsWith("@danwulff/")) {
+        if (packageName.startsWith('@danwulff/')) {
           const name = /@danwulff\/(.*)/.exec(packageName)?.[1];
           if (name) {
             dependencies[name] = true;

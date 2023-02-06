@@ -1,7 +1,7 @@
-import { css, html, LitElement, TemplateResult } from "lit";
-import { customElement } from "lit/decorators.js";
+import { css, html, LitElement, TemplateResult } from 'lit';
+import { customElement } from 'lit/decorators.js';
 
-@customElement("ds-card")
+@customElement('ds-card')
 export class DSCard extends LitElement {
   static override styles = css`
     .container {

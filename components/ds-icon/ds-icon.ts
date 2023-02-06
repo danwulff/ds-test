@@ -1,1 +1,1 @@
-export { DSIcon } from "./icon";
+export { DSIcon } from './icon';

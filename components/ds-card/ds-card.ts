@@ -1,1 +1,1 @@
-export { DSCard } from "./card";
+export { DSCard } from './card';

@@ -1,7 +1,7 @@
 const [_exec, _path, labels] = process.argv;
 
 const parsedSemverLabels = JSON.parse(labels).filter(
-  (label: string) => label === "patch" || label === "minor" || label === "major"
+  (label: string) => label === 'patch' || label === 'minor' || label === 'major'
 );
 
 if (parsedSemverLabels.length === 1) {
