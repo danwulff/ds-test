@@ -5,14 +5,14 @@ import { customElement, property } from "lit/decorators.js";
 export class DSIcon extends LitElement {
   static override styles = css`
     span {
-      color: grey;
+      color: green;
     }
   `;
 
   @property()
-  text = "some-icon";
+  icon = "some-icon";
 
   override render(): TemplateResult {
-    return html`<span>[]</span>`;
+    return html`<span class=${this.icon}>[]</span>`;
   }
 }
