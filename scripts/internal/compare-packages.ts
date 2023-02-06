@@ -20,12 +20,13 @@ export function comparePackagesForChanges(
     readFileSync(`${distDir}/package.json`, "utf-8")
   ).version;
 
-  // pick a version to compare our current version to
+  // grab remote info about the comparison package
   let compareTo: CompareTo;
   let viewResult: string;
   try {
     viewResult = execSync(
-      `npm view @danwulff/${name}@${compareToPackageTag} --json`
+      `npm view @danwulff/${name}@${compareToPackageTag} --json`,
+      { stdio: "pipe" }
     ).toString();
   } catch (e) {
     viewResult = "E404";
