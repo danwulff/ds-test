@@ -1,18 +1,18 @@
-import { readFileSync, writeFileSync } from "fs";
+import { readFileSync, writeFileSync } from 'fs';
 
 export function buildPackage(parentDir: string, name: string) {
   // template package
   const tempPackage = JSON.parse(
-    readFileSync(`${parentDir}/ds-package.json`, "utf-8").replaceAll(
-      "{{name}}",
+    readFileSync(`${parentDir}/ds-package.json`, 'utf-8').replaceAll(
+      '{{name}}',
       name
     )
   );
-  // module package
+    // module package
   const modulePackage = JSON.parse(
-    readFileSync(`${parentDir}/${name}/package.json`, "utf-8")
+    readFileSync(`${parentDir}/${name}/package.json`, 'utf-8')
   );
-  // add properties from module package
+    // add properties from module package
   tempPackage.version = modulePackage.version;
   tempPackage.peerDependencies ??= {};
   Object.entries(modulePackage.peerDependencies || {}).forEach(

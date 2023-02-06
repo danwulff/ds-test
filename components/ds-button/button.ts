@@ -1,7 +1,7 @@
-import { html, css, LitElement, TemplateResult } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { html, css, LitElement, TemplateResult } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 
-@customElement("ds-button")
+@customElement('ds-button')
 export class DSButton extends LitElement {
   static override styles = css`
     button {
@@ -11,7 +11,7 @@ export class DSButton extends LitElement {
   `;
 
   @property()
-  text = "Button";
+    text = 'Button';
 
   override render(): TemplateResult {
     return html`<button>${this.text}</button>`;

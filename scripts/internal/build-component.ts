@@ -1,10 +1,10 @@
-import { readFileSync, writeFileSync } from "fs";
-import { execSync } from "child_process";
+import { readFileSync, writeFileSync } from 'fs';
+import { execSync } from 'child_process';
 
 export function buildComponent(name: string): void {
   const tempTSConfig = JSON.parse(
-    readFileSync(`components/ds-tsconfig.component.json`, "utf-8").replaceAll(
-      "{{name}}",
+    readFileSync('components/ds-tsconfig.component.json', 'utf-8').replaceAll(
+      '{{name}}',
       name
     )
   );
@@ -14,6 +14,6 @@ export function buildComponent(name: string): void {
   );
 
   execSync(`npx tsc --project components/${name}/tsconfig.component.json`, {
-    stdio: "inherit",
+    stdio: 'inherit',
   });
 }
