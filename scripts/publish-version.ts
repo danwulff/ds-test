@@ -25,8 +25,8 @@ const tag = "latest";
 
 let aChangeWasPublished = false;
 
+// deploy style package snapshot
 {
-  // deploy style package snapshot
   const stylesDir = "styles";
   const stylePackageNames = getPackageNames(stylesDir);
   stylePackageNames.forEach((name) => {
@@ -51,8 +51,8 @@ let aChangeWasPublished = false;
   });
 }
 
+// deploy component packages
 {
-  // deploy component packages
   const componentsDir = "components";
   const componentPackageNames = getPackageNames(componentsDir);
   componentPackageNames.forEach((name) => {

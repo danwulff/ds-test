@@ -1,0 +1,7 @@
+{
+  "version": "0.0.0",
+  "peerDependencies": {
+    "@danwulff/ds-icon": "^0.0.9",
+    "@danwulff/ds-button": "^0.0.8"
+  }
+}

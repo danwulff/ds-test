@@ -43,8 +43,8 @@ const tag = `pr-${pullRequestNum}`;
   });
 }
 
+// deploy component packages
 {
-  // deploy component packages
   const componentsDir = "components";
   const componentPackageNames = getPackageNames(componentsDir);
   componentPackageNames.forEach((name) => {
