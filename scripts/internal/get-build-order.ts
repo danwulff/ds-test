@@ -42,13 +42,11 @@ export function getBuildOrder(parentDir: string, names: string[]): string[] {
 
     visitedPackages[name] = true;
 
-    if (Object.keys(dependencies).length !== 0) {
-      Object.keys(dependencies).forEach((dependency) => {
-        if (packages[dependency]) {
-          visitPackage(dependency, packages[dependency]);
-        }
-      });
-    }
+    Object.keys(dependencies).forEach((dependency) => {
+      if (packages[dependency]) {
+        visitPackage(dependency, packages[dependency]);
+      }
+    });
 
     order.push(name);
   }
