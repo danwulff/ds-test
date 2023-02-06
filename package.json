@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "node scripts/dist/build.js",
+    "lint": "eslint .",
     "publish-version": "node scripts/dist/publish-version.js",
     "publish-snapshot": "node scripts/dist/publish-snapshot.js",
     "postinstall": "rm -rf scripts/dist/ && npx tsc --project scripts/tsconfig.scripts.json && node scripts/dist/install.js",
@@ -21,6 +22,8 @@
   },
   "devDependencies": {
     "@open-wc/testing": "^3.1.7",
+    "@typescript-eslint/eslint-plugin": "^5.50.0",
+    "@typescript-eslint/parser": "^5.50.0",
     "eslint": "^8.33.0",
     "jest": "^29.4.1",
     "sass": "^1.58.0",
