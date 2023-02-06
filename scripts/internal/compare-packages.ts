@@ -2,10 +2,6 @@ import { readFileSync } from 'fs';
 import { execSync } from 'child_process';
 
 type compareResult = 'not-found' | 'change' | 'no-change';
-interface CompareTo {
-  version: string;
-  integrity: string;
-}
 
 export function comparePackagesForChanges(
   name: string,
