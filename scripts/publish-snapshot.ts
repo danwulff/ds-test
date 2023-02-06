@@ -1,11 +1,7 @@
 import { readFileSync } from "fs";
-import { execSync } from "child_process";
 import { getPackageNames } from "./internal/get-package-names";
-
-interface CompareTo {
-  version: string;
-  integrity: string;
-}
+import { comparePackagesForChanges } from "./internal/compare-packages";
+import { publishPackage } from "./internal/publish-package";
 
 const [_exec, _path, pullRequestNum, commitSHA] = process.argv;
 
@@ -15,84 +11,54 @@ const tag = `pr-${pullRequestNum}`;
 const stylesDir = "styles";
 const stylePackageNames = getPackageNames(stylesDir);
 stylePackageNames.forEach((name) => {
-  console.log(`@danwulff/${name}`);
-  console.log("Checking for changes...");
+  // check for "pr-#" tag changes
+  let changes = comparePackagesForChanges(name, stylesDir, tag);
+  // if no changes, check for "latest" tag changes
+  if (changes === "not-found") {
+    changes = comparePackagesForChanges(name, stylesDir, "latest");
+  }
 
-  // get current version
-  const distDir = `${stylesDir}/${name}/dist`;
-  const localVersion = JSON.parse(
-    readFileSync(`${distDir}/package.json`, "utf-8")
-  ).version;
-
-  // pick a version to compare our current version to
-  let compareTo: CompareTo;
-  let viewResult: string;
-  try {
-    viewResult = execSync(
-      `npm view @danwulff/${name}@${tag} --json`
-    ).toString();
-  } catch (e) {
-    console.log("error", e);
-    viewResult = "E404";
-  }
-  if (!viewResult.includes("E404")) {
-    console.log(`@danwulff/${name}@${tag} found`);
-    const parsedResult = JSON.parse(viewResult);
-    compareTo = {
-      version: parsedResult["dist-tags"][tag],
-      integrity: parsedResult.dist.integrity,
-    };
-  } else {
-    console.log(
-      `@danwulff/${name}@${tag} not found. Comparing to @danwulff/${name}@latest instead.`
-    );
-    viewResult = execSync(
-      `npm view @danwulff/${name}@latest --json`
-    ).toString();
-    const parsedResult = JSON.parse(viewResult);
-    compareTo = {
-      version: parsedResult["dist-tags"].latest,
-      integrity: parsedResult.dist.integrity,
-    };
-  }
-  console.log("Comparing to:", compareTo.version);
-  if (localVersion !== compareTo.version) {
-    execSync(`cd ${distDir} && npm version ${compareTo.version}`);
-  }
-  const localIntegrity = JSON.parse(
-    execSync(`cd ${distDir} && npm pack --dry-run --json`).toString()
-  )[0].integrity;
-  if (compareTo.integrity === localIntegrity) {
-    console.log(`No changes for ${name}.`);
+  // if no changes, return early
+  // if not found (should never happen), return early
+  if (changes === "no-change" || changes === "not-found") {
     console.log("-");
     return;
   }
 
   // set snapshot version
+  const localVersion = JSON.parse(
+    readFileSync(`${stylesDir}/${name}/package.json`, "utf-8")
+  ).version;
   const newVersion = `${localVersion}-${commitSHA}`;
-  execSync(`cd ${distDir} && npm version ${newVersion}`, { stdio: "inherit" });
-  // publish snapshot
-  execSync(`cd ${distDir} && npm publish --tag ${tag}`, {
-    stdio: "inherit",
-  });
-  console.log(`Published ${name} ${newVersion}`);
+  publishPackage(name, stylesDir, newVersion, tag);
   console.log(`Run 'npm i @danwulff/${name}@${tag}' to install`);
   console.log("-");
 });
 
-// // deploy component packages
-// const componentsDir = "components";
-// const componentPackageNames = getPackageNames(componentsDir);
-// componentPackageNames.forEach((name) => {
-//   const distDir = `${componentsDir}/${name}/dist`;
-//   // set package version
-//   const currentVersion = JSON.parse(
-//     readFileSync(`${distDir}/package.json`, "utf-8")
-//   ).version;
-//   const newVersion = `${currentVersion}-${commitSHA}`;
-//   execSync(`cd ${distDir} && npm version ${newVersion}`, { stdio: "inherit" });
-//   // publish snapshot
-//   execSync(`cd ${distDir} && npm publish --tag ${tag}`, {
-//     stdio: "inherit",
-//   });
-// });
+// deploy component packages
+const componentsDir = "components";
+const componentPackageNames = getPackageNames(componentsDir);
+componentPackageNames.forEach((name) => {
+  // check for "pr-#" tag changes
+  let changes = comparePackagesForChanges(name, componentsDir, tag);
+  // if no changes, check for "latest" tag changes
+  if (changes === "not-found") {
+    changes = comparePackagesForChanges(name, componentsDir, "latest");
+  }
+
+  // if no changes, return early
+  // if not found (should never happen), return early
+  if (changes === "no-change" || changes === "not-found") {
+    console.log("-");
+    return;
+  }
+
+  // set snapshot version
+  const localVersion = JSON.parse(
+    readFileSync(`${componentsDir}/${name}/package.json`, "utf-8")
+  ).version;
+  const newVersion = `${localVersion}-${commitSHA}`;
+  publishPackage(name, componentsDir, newVersion, tag);
+  console.log(`Run 'npm i @danwulff/${name}@${tag}' to install`);
+  console.log("-");
+});
