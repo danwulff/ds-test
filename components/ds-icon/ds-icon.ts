@@ -1,1 +1,0 @@
-export { DSIcon } from "./icon";
