@@ -43,6 +43,6 @@ jobs:
       - name: Run unit tests
         run: echo TODO
       - name: Publish canary packages
-        run: node scripts/publish-canary.js '${{ toJson(github.event.pull_request.labels.*.name) }}' '${{ github.event.pull_request.number }}' '${{ GITHUB_SHA }}'
+        run: node scripts/publish-canary.js '${{ toJson(github.event.pull_request.labels.*.name) }}' '${{ github.event.pull_request.number }}' $GITHUB_SHA
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
