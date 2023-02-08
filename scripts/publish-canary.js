@@ -14,4 +14,4 @@ if (parsedSemverLabels.length !== 1) {
 const version = parsedSemverLabels[0];
 const prPrefix = `pr${ pullRequestNum }`;
 
-execSync(`lerna publish --canary "${ version }" --preid "${ prPrefix }" --dist-tag "${ prPrefix }"`, { stdio: 'inherit' });
+execSync(`lerna publish --canary "${ version }" --preid "${ prPrefix }" --dist-tag "${ prPrefix }" --yes`, { stdio: 'inherit' });
