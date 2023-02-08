@@ -1,0 +1,7 @@
+{
+  "extends": "../../tsconfig.json",
+  "files": ["src/ds-icon.ts"],
+  "compilerOptions": {
+    "outDir": "lib"
+  }
+}
