@@ -1,0 +1,35 @@
+{
+  "name": "@danwulff/ds-icon",
+  "version": "0.0.1",
+  "description": "Font icons in a Web Component",
+  "keywords": [
+    "atlas",
+    "list",
+    "icon"
+  ],
+  "license": "UNLICENSED",
+  "main": "lib/ds-icon.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danwulff/ds-test.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint src",
+    "test": "echo TODO"
+  },
+  "peerDependencies": {
+    "lit": "^2.0.0",
+    "tslib": "^2.0.0"
+  }
+}

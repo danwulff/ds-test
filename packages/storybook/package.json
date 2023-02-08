@@ -1,0 +1,42 @@
+{
+  "name": "@danwulff/storybook",
+  "version": "0.0.1",
+  "private": true,
+  "description": "> TODO: description",
+  "author": "Daniel Wulff <danielwulff.ee@gmail.com>",
+  "homepage": "https://github.com/danwulff/ds-test#readme",
+  "license": "UNLICENSED",
+  "main": "lib/storybook.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danwulff/ds-test.git"
+  },
+  "scripts": {
+    "storybook": "storybook dev",
+    "build": "storybook build -o lib",
+    "test": "echo TODO"
+  },
+  "devDependencies": {
+    "@storybook/addon-essentials": "^7.0.0-beta.43",
+    "@storybook/addon-links": "^7.0.0-beta.43",
+    "@storybook/blocks": "^7.0.0-beta.43",
+    "@storybook/web-components": "^7.0.0-beta.43",
+    "@storybook/web-components-webpack5": "^7.0.0-beta.43",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "storybook": "^7.0.0-beta.43"
+  },
+  "dependencies": {
+    "@danwulff/ds-button": "^0.0.1"
+  }
+}
