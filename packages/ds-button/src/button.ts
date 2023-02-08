@@ -5,7 +5,7 @@ import { customElement, property } from 'lit/decorators.js';
 export class DSButton extends LitElement {
   static override styles = css`
     button {
-      background: black;
+      background: blue;
       color: white;
     }
   `;
