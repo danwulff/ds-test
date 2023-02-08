@@ -4,6 +4,9 @@
   "workspaces": [
     "packages/*"
   ],
+  "scripts": {
+    "storybook": "npm run storybook --workspace=packages/storybook & lerna watch --scope=@danwulff/storybook --include-dependencies -- lerna run build --scope=\\$LERNA_PACKAGE_NAME"
+  },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.51.0",
     "@typescript-eslint/parser": "^5.51.0",

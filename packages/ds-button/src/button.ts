@@ -5,13 +5,13 @@ import { customElement, property } from 'lit/decorators.js';
 export class DSButton extends LitElement {
   static override styles = css`
     button {
-      background: blue;
+      background: black;
       color: white;
     }
   `;
 
   @property()
-    text = 'Button';
+  text = 'Button';
 
   override render(): TemplateResult {
     return html`<button>${this.text}</button>`;
