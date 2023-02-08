@@ -11,7 +11,7 @@ export class DSButton extends LitElement {
   `;
 
   @property()
-  text = "Button";
+  text = 'Button';
 
   override render(): TemplateResult {
     return html`<button>${this.text}</button>`;
