@@ -29,6 +29,7 @@
     "test": "echo TODO"
   },
   "peerDependencies": {
-    "lit": "^2.3.0"
+    "lit": "^2.0.0",
+    "tslib": "^2.0.0"
   }
 }

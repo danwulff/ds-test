@@ -1,3 +1,1 @@
-export function iconFunc() {
-  console.log('func');
-}
+export { DSIcon } from './icon';

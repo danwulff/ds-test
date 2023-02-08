@@ -1,16 +1,11 @@
 {
-  "name": "@danwulff/ds-button",
+  "name": "@danwulff/ds-card",
   "version": "0.0.1",
-  "description": "Button",
-  "keywords": [
-    "atlas",
-    "list",
-    "icon"
-  ],
+  "description": "A card to hold your stuff",
   "author": "Daniel Wulff <danielwulff.ee@gmail.com>",
   "homepage": "https://github.com/danwulff/ds-test#readme",
   "license": "UNLICENSED",
-  "main": "lib/ds-button.js",
+  "main": "lib/ds-card.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -31,10 +26,7 @@
     "test": "echo TODO"
   },
   "dependencies": {
+    "@danwulff/ds-button": "^0.0.1",
     "@danwulff/ds-icon": "^0.0.1"
-  },
-  "peerDependencies": {
-    "lit": "^2.0.0",
-    "tslib": "^2.0.0"
   }
 }

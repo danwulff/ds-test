@@ -1,1 +1,1 @@
-export const foobar = 'yessir';
+export { DSButton } from './button';
