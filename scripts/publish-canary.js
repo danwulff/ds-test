@@ -1,4 +1,4 @@
-const execSync = require('child_process');
+const execSync = require('child_process').execSync;
 
 const [_exec, _path, labels, pullRequestNum] = process.argv;
 
